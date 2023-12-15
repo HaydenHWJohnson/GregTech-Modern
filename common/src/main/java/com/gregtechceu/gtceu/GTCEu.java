@@ -36,15 +36,10 @@ public class GTCEu {
     }
 
     public static ResourceLocation appendId(String id) {
-        String[] strings = new String[]{"gtceu", id};
-        int i = id.indexOf(':');
-        if (i >= 0) {
-            strings[1] = id.substring(i + 1);
-            if (i >= 1) {
-                strings[0] = id.substring(0, i);
-            }
-        }
-        return new ResourceLocation(strings[0], strings[1]);
+        int colonIndex = id.indexOf(':');
+        String namespace = (colonIndex >= 0) ? id.substring(0, colonIndex) : MOD_ID;
+        String path = (colonIndex >= 0) ? id.substring(colonIndex + 1) : id;
+        return new ResourceLocation(namespace, path);
     }
 
     public static boolean isKubeJSLoaded() {
